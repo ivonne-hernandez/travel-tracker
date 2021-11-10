@@ -39,5 +39,20 @@ body {
       height: 80px;
     }
   }
+
+  nav {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    justify-content: space-between;
+    margin: 40px 0px 40px 40px;
+
+    .nav-button {
+      width: 175px;
+      height: 41px;
+      background-color: #BED2D5;
+      font-family: $primary-font;
+      font-size: 20px;
+    }
+  }
   
 }
