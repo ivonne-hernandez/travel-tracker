@@ -14,6 +14,11 @@ import {
   fetchAllDestinations
 } from './apiCalls';
 
+import Traveler from './Traveler';
+import TravelerRepository from './TravelerRepository';
+let travelerRepository;
+let traveler;
+
 const fetchAll = () => {
   const allTravelersDataPromise = fetchAllTravelersData();
   const singleTravelerDataPromise = fetchSingleTravelerData(1);//need to pass in the userId
@@ -22,7 +27,7 @@ const fetchAll = () => {
   
   Promise.all([allTravelersDataPromise, singleTravelerDataPromise, allTripsDataPromise, allDestinationsDataPromise])
   .then(data => {
-    console.log(`allTravelersDataPromise:`, data[0]);
+    instantiateNewTravelerRepository(data[0]);
     console.log(`singleTravelerDataPromise:`, data[1]);
     console.log(`allTrips:`, data[2]);
     console.log(`allDestinationsDataPromise:`, data[3]);
@@ -30,3 +35,14 @@ const fetchAll = () => {
 }
 
 fetchAll();
+
+const instantiateNewTravelerRepository = (allTravelersData) => {
+  travelerRepository = new TravelerRepository(allTravelersData.travelers);
+  console.log(`allTravelersDataRepo:`, travelerRepository);
+  const travelerTest = travelerRepository.getTravelerData(2);
+  console.log(`travelerTest`,travelerTest)
+}
+
+const instantiateTraveler = (travelerRepository) => {
+  travelerRepository = new TravelerRepository();
+}
