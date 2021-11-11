@@ -2,3 +2,4 @@ class Traveler {
   constructor(data) {
   }
 }
+
