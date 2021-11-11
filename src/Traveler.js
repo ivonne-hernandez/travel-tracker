@@ -1,0 +1,4 @@
+class Traveler {
+  constructor(data) {
+  }
+}
