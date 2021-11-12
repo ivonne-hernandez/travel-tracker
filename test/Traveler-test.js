@@ -6,6 +6,9 @@ describe('Traveler', () => {
   let singleTravelerInformation;
   let tripsForTraveler;
   let pastTripsBasedOnTodaysDate;
+  let presentTripsBasedOnTodaysDate;
+  let upcomingTripsBasedOnTodaysDate;
+  let pendingTripsBasedOnTodaysDate;
 
   beforeEach(function() {
     singleTravelerInformation = {
@@ -60,7 +63,7 @@ describe('Traveler', () => {
         "userID": 33,
         "destinationID": 24,
         "travelers": 5,
-        "date": "2020/06/29",
+        "date": "2021/11/12",
         "duration": 20,
         "status": "approved",
         "suggestedActivities": []
@@ -70,7 +73,7 @@ describe('Traveler', () => {
         "userID": 33,
         "destinationID": 41,
         "travelers": 1,
-        "date": "2020/01/12",
+        "date": "2021/11/12",
         "duration": 11,
         "status": "approved",
         "suggestedActivities": []
@@ -80,7 +83,7 @@ describe('Traveler', () => {
         "userID": 33,
         "destinationID": 25,
         "travelers": 4,
-        "date": "2019/11/30",
+        "date": "2022/11/30",
         "duration": 7,
         "status": "approved",
         "suggestedActivities": []
@@ -92,7 +95,7 @@ describe('Traveler', () => {
         "travelers": 2,
         "date": "2019/12/25",
         "duration": 16,
-        "status": "approved",
+        "status": "pending",
         "suggestedActivities": []
       }
     ];
@@ -127,13 +130,16 @@ describe('Traveler', () => {
         "duration": 5,
         "status": "approved",
         "suggestedActivities": []
-      },
+      }
+    ];
+
+    presentTripsBasedOnTodaysDate = [
       {
         "id": 136,
         "userID": 33,
         "destinationID": 24,
         "travelers": 5,
-        "date": "2020/06/29",
+        "date": "2021/11/12",
         "duration": 20,
         "status": "approved",
         "suggestedActivities": []
@@ -143,8 +149,21 @@ describe('Traveler', () => {
         "userID": 33,
         "destinationID": 41,
         "travelers": 1,
-        "date": "2020/01/12",
+        "date": "2021/11/12",
         "duration": 11,
+        "status": "approved",
+        "suggestedActivities": []
+      }
+    ];
+
+    upcomingTripsBasedOnTodaysDate = [
+      {
+        "id": 12,
+        "userID": 33,
+        "destinationID": 33,
+        "travelers": 6,
+        "date": "2022/10/17",
+        "duration": 6,
         "status": "approved",
         "suggestedActivities": []
       },
@@ -153,11 +172,15 @@ describe('Traveler', () => {
         "userID": 33,
         "destinationID": 25,
         "travelers": 4,
-        "date": "2019/11/30",
+        "date": "2022/11/30",
         "duration": 7,
         "status": "approved",
         "suggestedActivities": []
-      },
+      }
+     
+    ];
+
+    pendingTripsBasedOnTodaysDate = [
       {
         "id": 178,
         "userID": 33,
@@ -165,7 +188,7 @@ describe('Traveler', () => {
         "travelers": 2,
         "date": "2019/12/25",
         "duration": 16,
-        "status": "approved",
+        "status": "pending",
         "suggestedActivities": []
       }
     ];
@@ -198,8 +221,15 @@ describe('Traveler', () => {
   });
 
   it('should return the past trips based on today\'s date', function() {
-    const result = traveler.getPastTrips();
-    expect(result).to.deep.equal(pastTripsBasedOnTodaysDate)
-  })
+    const result = traveler.getPastTrips(new Date("2021/11/12"));
+    expect(result).to.deep.equal(pastTripsBasedOnTodaysDate);
+  });
+
+  it('should return the present trips based on today\'s date', function() {
+    const result = traveler.getPresentTrips(new Date("2021/11/12"));
+    expect(result).to.deep.equal(presentTripsBasedOnTodaysDate)
+  });
+
+  
 });
 
