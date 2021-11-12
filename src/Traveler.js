@@ -29,18 +29,28 @@ class Traveler {
         return trip.status === `approved`
           && tripStartDate <= todaysDate
           && todaysDate <= tripEndDate;  
-      })
+      });
     return presentTrips;
   }
 
-  getUpcomingTrips() {
-    //must be approved & be greater than today's date
-    //approved but compared to new Date() these dates
-    //are bigger? i.e in the future
+  getUpcomingTrips(todaysDate = new Date()) {
+    const upcomingTrips = this.trips 
+      .filter(trip => {
+        const tripStartDate = new Date(trip.date);
+        return trip.status === `approved` 
+          && todaysDate < tripStartDate;  
+      });
+    return upcomingTrips;
+
+
   }
 
   getPendingTrips() {
-    //all status is pending
+    const pendingTrips = this.trips
+      .filter(trip => trip.status === `pending`);
+    
+    return pendingTrips;
   }
+  
 }
 export default Traveler;
