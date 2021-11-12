@@ -5,6 +5,7 @@ describe('Traveler', () => {
   let traveler;
   let singleTravelerInformation;
   let tripsForTraveler;
+  let pastTripsBasedOnTodaysDate;
 
   beforeEach(function() {
     singleTravelerInformation = {
@@ -96,6 +97,79 @@ describe('Traveler', () => {
       }
     ];
 
+    pastTripsBasedOnTodaysDate = [
+      {
+        "id": 30,
+        "userID": 33,
+        "destinationID": 29,
+        "travelers": 1,
+        "date": "2020/07/17",
+        "duration": 5,
+        "status": "approved",
+        "suggestedActivities": []
+      },
+      {
+        "id": 57,
+        "userID": 33,
+        "destinationID": 17,
+        "travelers": 2,
+        "date": "2019/07/04",
+        "duration": 20,
+        "status": "approved",
+        "suggestedActivities": []
+      },
+      {
+        "id": 118,
+        "userID": 33,
+        "destinationID": 19,
+        "travelers": 5,
+        "date": "2021/02/09",
+        "duration": 5,
+        "status": "approved",
+        "suggestedActivities": []
+      },
+      {
+        "id": 136,
+        "userID": 33,
+        "destinationID": 24,
+        "travelers": 5,
+        "date": "2020/06/29",
+        "duration": 20,
+        "status": "approved",
+        "suggestedActivities": []
+      },
+      {
+        "id": 157,
+        "userID": 33,
+        "destinationID": 41,
+        "travelers": 1,
+        "date": "2020/01/12",
+        "duration": 11,
+        "status": "approved",
+        "suggestedActivities": []
+      },
+      {
+        "id": 164,
+        "userID": 33,
+        "destinationID": 25,
+        "travelers": 4,
+        "date": "2019/11/30",
+        "duration": 7,
+        "status": "approved",
+        "suggestedActivities": []
+      },
+      {
+        "id": 178,
+        "userID": 33,
+        "destinationID": 40,
+        "travelers": 2,
+        "date": "2019/12/25",
+        "duration": 16,
+        "status": "approved",
+        "suggestedActivities": []
+      }
+    ];
+
     traveler = new Traveler(singleTravelerInformation, tripsForTraveler);
   });
 
@@ -103,7 +177,7 @@ describe('Traveler', () => {
     expect(Traveler).to.be.a('function');
   });
 
-  it('should be an instance of User Repository', function() {
+  it('should be an instance of Traveler', function() {
     expect(traveler).to.be.an.instanceOf(Traveler);
   });
 
@@ -122,5 +196,10 @@ describe('Traveler', () => {
   it('should have an array of trips', function() {
     expect(traveler.trips).to.deep.equal(tripsForTraveler);
   });
+
+  it('should return the past trips based on today\'s date', function() {
+    const result = traveler.getPastTrips();
+    expect(result).to.deep.equal(pastTripsBasedOnTodaysDate)
+  })
 });
 
