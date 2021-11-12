@@ -8,7 +8,7 @@ describe('Traveler', () => {
   let pastTripsBasedOnTodaysDate;
   let presentTripsBasedOnTodaysDate;
   let upcomingTripsBasedOnTodaysDate;
-  let pendingTripsBasedOnTodaysDate;
+  let pendingTrips;
 
   beforeEach(function() {
     singleTravelerInformation = {
@@ -177,10 +177,9 @@ describe('Traveler', () => {
         "status": "approved",
         "suggestedActivities": []
       }
-     
     ];
 
-    pendingTripsBasedOnTodaysDate = [
+    pendingTrips = [
       {
         "id": 178,
         "userID": 33,
@@ -230,6 +229,14 @@ describe('Traveler', () => {
     expect(result).to.deep.equal(presentTripsBasedOnTodaysDate)
   });
 
+  it('should return the upcoming trips based on today\'s date', function() {
+    const result = traveler.getUpcomingTrips(new Date("2021/11/12"));
+    expect(result).to.deep.equal(upcomingTripsBasedOnTodaysDate)
+  });
   
+  it('should return the pending trips', function() {
+    const result = traveler.getPendingTrips();
+    expect(result).to.deep.equal(pendingTrips)
+  });
 });
 
