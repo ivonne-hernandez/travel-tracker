@@ -6,21 +6,31 @@ class Traveler {
     this.trips = tripsForTraveler;
   }
 
-  getPastTrips() {
-    const todaysDate = new Date();
+  getPastTrips(todaysDate = new Date()) {
     const pastTrips = this.trips
-    .filter(trip => {
-      const tripDate = new Date(trip.date);
-      return trip.status === `approved` && tripDate < todaysDate;
-    })
+      .filter(trip => {
+        const tripStartDate = new Date(trip.date);
+        const milliSecsInOneDay = 1000 * 60 * 60 * 24;
+        const tripDurationInDays = trip.duration;
+        const tripEndDate = new Date(tripStartDate.valueOf() + milliSecsInOneDay * tripDurationInDays);
+        return trip.status === `approved`
+          && tripEndDate < todaysDate;
+      });
     return pastTrips;
-    //must be approved & be less than today's date
   }
   
-  getPresentTrips() {
-    //must be approved & include today's date
-    //if "today" is within the start and end date (duration of the trip)
-    //need to use new Date() to compare
+  getPresentTrips(todaysDate = new Date()) {
+    const presentTrips = this.trips
+      .filter(trip => {
+        const tripStartDate = new Date(trip.date);
+        const milliSecsInOneDay = 1000 * 60 * 60 * 24;
+        const tripDurationInDays = trip.duration;
+        const tripEndDate = new Date(tripStartDate.valueOf() + milliSecsInOneDay * tripDurationInDays);
+        return trip.status === `approved`
+          && tripStartDate <= todaysDate
+          && todaysDate <= tripEndDate;  
+      })
+    return presentTrips;
   }
 
   getUpcomingTrips() {
