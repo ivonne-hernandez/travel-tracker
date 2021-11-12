@@ -15,34 +15,43 @@ import {
 } from './apiCalls';
 
 import Traveler from './Traveler';
-import TravelerRepository from './TravelerRepository';
-let travelerRepository;
+
+let tripsDataForTraveler;
 let traveler;
+let userId = 33;
 
 const fetchAll = () => {
   const allTravelersDataPromise = fetchAllTravelersData();
-  const singleTravelerDataPromise = fetchSingleTravelerData(1);//need to pass in the userId
+  const singleTravelerDataPromise = fetchSingleTravelerData(userId);//need to pass in the userId
   const allTripsDataPromise = fetchAllTrips();
   const allDestinationsDataPromise = fetchAllDestinations();
   
   Promise.all([allTravelersDataPromise, singleTravelerDataPromise, allTripsDataPromise, allDestinationsDataPromise])
   .then(data => {
-    instantiateNewTravelerRepository(data[0]);
-    console.log(`singleTravelerDataPromise:`, data[1]);
-    console.log(`allTrips:`, data[2]);
-    console.log(`allDestinationsDataPromise:`, data[3]);
+    tripsDataForTraveler = getTripsForTraveler(data[1], data[2]);
+    instantiateTraveler(data[1], tripsDataForTraveler)
+    // console.log(`allDestinationsDataPromise:`, data[3]);
   })
 }
 
 fetchAll();
 
-const instantiateNewTravelerRepository = (allTravelersData) => {
-  travelerRepository = new TravelerRepository(allTravelersData.travelers);
-  console.log(`allTravelersDataRepo:`, travelerRepository);
-  const travelerTest = travelerRepository.getTravelerData(2);
-  console.log(`travelerTest`,travelerTest)
+const getTripsForTraveler = (singleTravelerData, allTripsData) => {
+  const allTripsForSingleTraveler = allTripsData.trips
+    .filter((trip) => trip.userID === singleTravelerData.id);
+  return allTripsForSingleTraveler;
 }
 
-const instantiateTraveler = (travelerRepository) => {
-  travelerRepository = new TravelerRepository();
+const instantiateTraveler = (travelerData, tripsForTraveler) => {
+  traveler = new Traveler(travelerData, tripsForTraveler);
+  console.log(traveler.trips)
 }
+
+// let destinations = [];
+// fetch("http://localhost:3001/api/v1/destinations")
+//   .then(response => response.json)
+//   .then(data => {
+//     destinations = data.destinations.map(destination => {
+//       return new Destination(destination)
+//     });
+//   });
