@@ -171,7 +171,7 @@ let domUpdates = {
     const totalTravelExpensesThisYear = this.getTravelExpensesThisYear(traveler, thisYear);
     this.mainContainer.innerHTML = `
       <h2>Total Travel Expenses for ${thisYear}:</h2>
-      <p>$${Number(totalTravelExpensesThisYear).toFixed(2)}</p>
+      <p>$${Number(totalTravelExpensesThisYear).toFixed(2)} (10% fee included)</p>
     `;
   }
 
