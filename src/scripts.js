@@ -54,13 +54,6 @@ const findDestinationForTrip = (trip, allDestinationData) => {
   return allDestinationData.find((destination) => destination.id === trip.destinationID);
 }
 
-const getTotalTravelExpensesThisYear = (todaysDate = new Date(), allTripsForTraveler) => {
-  //need to get the year from todaysDate
-  //need to iterate over allTripsForTraveler and filter the ones whose year matches && status has to be approved
-  //then use a reduce to calculate the total travel expenses for that year
-  //return total cost
-}
-
 window.addEventListener('load', fetchAll);
 
 const addNewTripButton = document.querySelector('#addNewTripButton');
@@ -91,5 +84,5 @@ pendingTripsButton.addEventListener('click', () => {
 
 const travelExpensesButton = document.querySelector('#travelExpensesButton');
 travelExpensesButton.addEventListener('click', () => {
-  domUpdates.displayTravelExpenses(traveler, new Date().getFullYear());
+  domUpdates.displayTravelExpenses(traveler.getTravelExpensesForYear());
 })
