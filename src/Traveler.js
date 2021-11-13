@@ -34,23 +34,16 @@ class Traveler {
   }
 
   getUpcomingTrips(todaysDate = new Date()) {
-    const upcomingTrips = this.trips 
-      .filter(trip => {
-        const tripStartDate = new Date(trip.date);
-        return trip.status === `approved` 
-          && todaysDate < tripStartDate;  
-      });
+    const upcomingTrips = this.trips.filter(trip => {
+      const tripStartDate = new Date(trip.date);
+      return trip.status === `approved` && todaysDate < tripStartDate;  
+    });
     return upcomingTrips;
-
-
   }
 
   getPendingTrips() {
-    const pendingTrips = this.trips
-      .filter(trip => trip.status === `pending`);
-    
+    const pendingTrips = this.trips.filter(trip => trip.status === `pending`);
     return pendingTrips;
-  }
-  
+  } 
 }
 export default Traveler;
