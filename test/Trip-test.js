@@ -69,9 +69,8 @@ describe('Trip', () => {
     expect(trip.destination).to.deep.equal(destinationData);
   });
 
-  it('should calculate the total cost for a trip', function() {
+  it('should calculate the total cost for a trip (travel agent\'s fee included)', function() {
     const result = trip.calculateCost();
     expect(result).to.equal(5819);
   });
-  
 });
