@@ -83,3 +83,8 @@ const upcomingTripsButton = document.querySelector('#upcomingTripsButton');
 upcomingTripsButton.addEventListener('click', () => {
   domUpdates.displayUpcomingTrips(traveler);
 });
+
+const pendingTripsButton = document.querySelector('#pendingTripsButton');
+pendingTripsButton.addEventListener('click', () => {
+  domUpdates.displayPendingTrips(traveler);
+})

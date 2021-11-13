@@ -37,6 +37,11 @@ let domUpdates = {
   displayPastTrips(traveler) {
     const travelersPastTrips = traveler.getPastTrips();
     this.mainContainer.innerHTML = "<h2>Past Trips:</h2>";
+    if (!travelersPastTrips.length) {
+      this.mainContainer.innerHTML += `
+        <p>Nothing to see here.</p> 
+        <p>Go book a new trip to get away today!</p>`;
+    }
 
     travelersPastTrips.forEach((pastTrip) => {
       let suggestedActivitiesParagraph = '';
@@ -65,7 +70,7 @@ let domUpdates = {
     this.mainContainer.innerHTML = "<h2>Present Trips:</h2>";
     if (!travelersPresentTrips.length) {
       this.mainContainer.innerHTML += `
-        <p>Nothing here to see 🥺.</p> 
+        <p>Nothing to see here.</p> 
         <p>Go book a new trip to get away today!</p>`;
     }
     travelersPresentTrips.forEach((presentTrip) => {
@@ -95,8 +100,8 @@ let domUpdates = {
     this.mainContainer.innerHTML = "<h2>Upcoming Trips:</h2>";
     if (!travelersUpcomingTrips.length) {
       this.mainContainer.innerHTML += `
-        <p>Nothing here to see 🥺.</p> 
-        <p>Go book a new trip to get away in the upcoming future!</p>`;
+        <p>Nothing to see here.</p> 
+        <p>Go book a new trip to get away today!</p>`;
     }
     travelersUpcomingTrips.forEach((upcomingTrip) => {
       let suggestedActivitiesParagraph = '';
@@ -115,6 +120,36 @@ let domUpdates = {
           <p>Status: ${upcomingTrip.status}</p>
           ${suggestedActivitiesParagraph}
           <img class="destination-image" src=${upcomingTrip.destination.image} alt="${upcomingTrip.destination.alt}">
+        </article>
+      `;
+    });
+  }, 
+
+  displayPendingTrips(traveler) {
+    const travelersPendingTrips = traveler.getPendingTrips();
+    this.mainContainer.innerHTML = "<h2>Pending Trips:</h2>";
+    if (!travelersPendingTrips.length) {
+      this.mainContainer.innerHTML += `
+        <p>Nothing to see here.</p> 
+        <p>Go book a new trip to get away today!</p>`;
+    }
+    travelersPendingTrips.forEach((pendingTrip) => {
+      let suggestedActivitiesParagraph = '';
+      if (pendingTrip.suggestedActivities.length) {
+        suggestedActivitiesParagraph = `
+          <p>Suggested Activities: ${pendingTrip.suggestedActivities}</p>
+        `;
+      }
+
+      this.mainContainer.innerHTML += `
+        <article class="trip-container">
+          <p>Destination: ${pendingTrip.destination.destination}</p>
+          <p>Number of travelers: ${pendingTrip.travelers}</p>
+          <p>Date: ${pendingTrip.date}</p>
+          <p>Duration: ${pendingTrip.duration} days</p>
+          <p>Status: ${pendingTrip.status}</p>
+          ${suggestedActivitiesParagraph}
+          <img class="destination-image" src=${pendingTrip.destination.image} alt="${pendingTrip.destination.alt}">
         </article>
       `;
     });
