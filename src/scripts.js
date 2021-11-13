@@ -88,3 +88,8 @@ const pendingTripsButton = document.querySelector('#pendingTripsButton');
 pendingTripsButton.addEventListener('click', () => {
   domUpdates.displayPendingTrips(traveler);
 })
+
+const travelExpensesButton = document.querySelector('#travelExpensesButton');
+travelExpensesButton.addEventListener('click', () => {
+  domUpdates.displayTravelExpenses(traveler, new Date().getFullYear());
+})
