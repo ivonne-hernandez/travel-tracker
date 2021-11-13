@@ -19,6 +19,7 @@ import {
 import Traveler from './Traveler';
 import Trip from './Trip';
 import Destination from './Destination';
+import domUpdates from './domUpdates';
 
 let traveler;
 let userId = 44;
@@ -35,6 +36,7 @@ const fetchAll = () => {
       const allDestinationData = data[2].destinations;
       const tripsForTraveler = getTripsForTraveler(singleTravelerData, allTripsData, allDestinationData);
       traveler = new Traveler(singleTravelerData, tripsForTraveler);
+      domUpdates.displayTravelerWelcomeMsg(traveler);
     })
 }
 
@@ -53,3 +55,12 @@ const findDestinationForTrip = (trip, allDestinationData) => {
 }
 
 window.addEventListener('load', fetchAll);
+const pastTripsButton = document.querySelector('#pastTripsButton');
+pastTripsButton.addEventListener('click', () => {
+  domUpdates.displayPastTrips(traveler);
+});
+
+const addNewTripButton = document.querySelector('#addNewTripButton');
+addNewTripButton.addEventListener('click', () => {
+  domUpdates.displayNewTripForm();
+});
