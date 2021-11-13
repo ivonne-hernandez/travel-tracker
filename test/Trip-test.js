@@ -68,6 +68,10 @@ describe('Trip', () => {
   it('should have a destination', function() {
     expect(trip.destination).to.deep.equal(destinationData);
   });
-  
+
+  it('should calculate the total cost for a trip', function() {
+    const result = trip.calculateCost();
+    expect(result).to.equal(5819);
+  });
   
 });
