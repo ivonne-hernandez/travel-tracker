@@ -58,6 +58,34 @@ let domUpdates = {
         </div>
       </form>
     `;
+  displayPresentTrips(traveler) {
+    const travelersPresentTrips = traveler.getPresentTrips();
+    this.mainContainer.innerHTML = "<h2>Present Trips:</h2>";
+    if (!travelersPresentTrips.length) {
+      this.mainContainer.innerHTML += `
+        <p>Nothing here to see 🥺.</p> 
+        <p>Go book a new trip to get away today!</p>`;
+    }
+    travelersPresentTrips.forEach((presentTrip) => {
+      let suggestedActivitiesParagraph = '';
+      if (presentTrip.suggestedActivities.length) {
+        suggestedActivitiesParagraph = `
+          <p>Suggested Activities: ${presentTrip.suggestedActivities}</p>
+        `;
+      }
+
+      this.mainContainer.innerHTML += `
+        <article class="trip-container">
+          <p>Destination: ${presentTrip.destination.destination}</p>
+          <p>Number of travelers: ${presentTrip.travelers}</p>
+          <p>Date: ${presentTrip.date}</p>
+          <p>Duration: ${presentTrip.duration} days</p>
+          <p>Status: ${presentTrip.status}</p>
+          ${suggestedActivitiesParagraph}
+          <img class="destination-image" src=${presentTrip.destination.image} alt="${presentTrip.destination.alt}">
+        </article>
+      `;
+    });
   }
 }
 
