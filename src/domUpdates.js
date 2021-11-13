@@ -1,32 +1,6 @@
 let domUpdates = {
   mainContainer: document.querySelector('.main-container'),
 
-  displayPastTrips(traveler) {
-    const travelersPastTrips = traveler.getPastTrips();
-    this.mainContainer.innerHTML = "<h2>Past Trips:</h2>";
-
-    travelersPastTrips.forEach((pastTrip) => {
-      let suggestedActivitiesParagraph = '';
-      if (pastTrip.suggestedActivities.length) {
-        suggestedActivitiesParagraph = `
-          <p>Suggested Activities: ${pastTrip.suggestedActivities}</p>
-        `;
-      }
-
-      this.mainContainer.innerHTML += `
-        <article class="trip-container">
-          <p>Destination: ${pastTrip.destination.destination}</p>
-          <p>Number of travelers: ${pastTrip.travelers}</p>
-          <p>Date: ${pastTrip.date}</p>
-          <p>Duration: ${pastTrip.duration} days</p>
-          <p>Status: ${pastTrip.status}</p>
-          ${suggestedActivitiesParagraph}
-          <img class="destination-image" src=${pastTrip.destination.image} alt="${pastTrip.destination.alt}">
-        </article>
-      `;
-    });
-  },
-
   displayTravelerWelcomeMsg(traveler) {
     const welcomeTraveler = document.querySelector('#welcomeTravelerMsg');
     welcomeTraveler.innerText = `Welcome ${traveler.name}`
@@ -58,6 +32,34 @@ let domUpdates = {
         </div>
       </form>
     `;
+  }, 
+
+  displayPastTrips(traveler) {
+    const travelersPastTrips = traveler.getPastTrips();
+    this.mainContainer.innerHTML = "<h2>Past Trips:</h2>";
+
+    travelersPastTrips.forEach((pastTrip) => {
+      let suggestedActivitiesParagraph = '';
+      if (pastTrip.suggestedActivities.length) {
+        suggestedActivitiesParagraph = `
+          <p>Suggested Activities: ${pastTrip.suggestedActivities}</p>
+        `;
+      }
+
+      this.mainContainer.innerHTML += `
+        <article class="trip-container">
+          <p>Destination: ${pastTrip.destination.destination}</p>
+          <p>Number of travelers: ${pastTrip.travelers}</p>
+          <p>Date: ${pastTrip.date}</p>
+          <p>Duration: ${pastTrip.duration} days</p>
+          <p>Status: ${pastTrip.status}</p>
+          ${suggestedActivitiesParagraph}
+          <img class="destination-image" src=${pastTrip.destination.image} alt="${pastTrip.destination.alt}">
+        </article>
+      `;
+    });
+  },
+
   displayPresentTrips(traveler) {
     const travelersPresentTrips = traveler.getPresentTrips();
     this.mainContainer.innerHTML = "<h2>Present Trips:</h2>";
@@ -83,6 +85,36 @@ let domUpdates = {
           <p>Status: ${presentTrip.status}</p>
           ${suggestedActivitiesParagraph}
           <img class="destination-image" src=${presentTrip.destination.image} alt="${presentTrip.destination.alt}">
+        </article>
+      `;
+    });
+  },
+
+  displayUpcomingTrips(traveler) {
+    const travelersUpcomingTrips = traveler.getUpcomingTrips();
+    this.mainContainer.innerHTML = "<h2>Upcoming Trips:</h2>";
+    if (!travelersUpcomingTrips.length) {
+      this.mainContainer.innerHTML += `
+        <p>Nothing here to see 🥺.</p> 
+        <p>Go book a new trip to get away in the upcoming future!</p>`;
+    }
+    travelersUpcomingTrips.forEach((upcomingTrip) => {
+      let suggestedActivitiesParagraph = '';
+      if (upcomingTrip.suggestedActivities.length) {
+        suggestedActivitiesParagraph = `
+          <p>Suggested Activities: ${upcomingTrip.suggestedActivities}</p>
+        `;
+      }
+
+      this.mainContainer.innerHTML += `
+        <article class="trip-container">
+          <p>Destination: ${upcomingTrip.destination.destination}</p>
+          <p>Number of travelers: ${upcomingTrip.travelers}</p>
+          <p>Date: ${upcomingTrip.date}</p>
+          <p>Duration: ${upcomingTrip.duration} days</p>
+          <p>Status: ${upcomingTrip.status}</p>
+          ${suggestedActivitiesParagraph}
+          <img class="destination-image" src=${upcomingTrip.destination.image} alt="${upcomingTrip.destination.alt}">
         </article>
       `;
     });
