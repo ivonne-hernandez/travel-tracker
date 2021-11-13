@@ -9,6 +9,13 @@ class Trip {
     this.destination = destination;
   }
 
+  calculateCost() {
+    const totalLodgingCost = this.destination.estimatedLodgingCostPerDay * this.duration;
+    const totalFlightCost = this.destination.estimatedFlightCostPerPerson * this.travelers;
+    const travelAgentsFeeIncluded = 1.10;
+    const totalTripCost = (totalLodgingCost + totalFlightCost) * travelAgentsFeeIncluded;
+    return Math.floor(totalTripCost);
+  }
 }
 
 export default Trip;
