@@ -153,7 +153,29 @@ let domUpdates = {
         </article>
       `;
     });
+  }, 
+
+  getTravelExpensesThisYear(traveler, thisYear) {
+    const allTripsForTraveler = traveler.trips;
+    const totalTravelExpensesThisYear = allTripsForTraveler
+      .reduce((totalCost, trip) => {
+        if (new Date(trip.date).getFullYear() === thisYear) {
+          totalCost += trip.calculateCost();
+        }
+        return totalCost;
+      }, 0);
+      return totalTravelExpensesThisYear;
+  },
+
+  displayTravelExpenses(traveler, thisYear) {
+    const totalTravelExpensesThisYear = this.getTravelExpensesThisYear(traveler, thisYear);
+    this.mainContainer.innerHTML = `
+      <h2>Total Travel Expenses for ${thisYear}:</h2>
+      <p>$${Number(totalTravelExpensesThisYear).toFixed(2)}</p>
+    `;
   }
+
+  
 }
 
 export default domUpdates;
