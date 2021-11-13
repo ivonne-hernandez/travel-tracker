@@ -34,126 +34,35 @@ let domUpdates = {
     `;
   }, 
 
-  displayPastTrips(traveler) {
-    const travelersPastTrips = traveler.getPastTrips();
-    this.mainContainer.innerHTML = "<h2>Past Trips:</h2>";
-    if (!travelersPastTrips.length) {
+  displayTrips(trips, type) {
+    this.mainContainer.innerHTML = `<h2>${type} Trips:</h2>`;
+    if (!trips.length) {
       this.mainContainer.innerHTML += `
         <p>Nothing to see here.</p> 
         <p>Go book a new trip to get away today!</p>`;
     }
 
-    travelersPastTrips.forEach((pastTrip) => {
+    trips.forEach((trip) => {
       let suggestedActivitiesParagraph = '';
-      if (pastTrip.suggestedActivities.length) {
+      if (trip.suggestedActivities.length) {
         suggestedActivitiesParagraph = `
-          <p>Suggested Activities: ${pastTrip.suggestedActivities}</p>
+          <p>Suggested Activities: ${trip.suggestedActivities}</p>
         `;
       }
 
       this.mainContainer.innerHTML += `
         <article class="trip-container">
-          <p>Destination: ${pastTrip.destination.destination}</p>
-          <p>Number of travelers: ${pastTrip.travelers}</p>
-          <p>Date: ${pastTrip.date}</p>
-          <p>Duration: ${pastTrip.duration} days</p>
-          <p>Status: ${pastTrip.status}</p>
+          <p>Destination: ${trip.destination.destination}</p>
+          <p>Number of travelers: ${trip.travelers}</p>
+          <p>Date: ${trip.date}</p>
+          <p>Duration: ${trip.duration} days</p>
+          <p>Status: ${trip.status}</p>
           ${suggestedActivitiesParagraph}
-          <img class="destination-image" src=${pastTrip.destination.image} alt="${pastTrip.destination.alt}">
+          <img class="destination-image" src=${trip.destination.image} alt="${trip.destination.alt}">
         </article>
       `;
     });
   },
-
-  displayPresentTrips(traveler) {
-    const travelersPresentTrips = traveler.getPresentTrips();
-    this.mainContainer.innerHTML = "<h2>Present Trips:</h2>";
-    if (!travelersPresentTrips.length) {
-      this.mainContainer.innerHTML += `
-        <p>Nothing to see here.</p> 
-        <p>Go book a new trip to get away today!</p>`;
-    }
-    travelersPresentTrips.forEach((presentTrip) => {
-      let suggestedActivitiesParagraph = '';
-      if (presentTrip.suggestedActivities.length) {
-        suggestedActivitiesParagraph = `
-          <p>Suggested Activities: ${presentTrip.suggestedActivities}</p>
-        `;
-      }
-
-      this.mainContainer.innerHTML += `
-        <article class="trip-container">
-          <p>Destination: ${presentTrip.destination.destination}</p>
-          <p>Number of travelers: ${presentTrip.travelers}</p>
-          <p>Date: ${presentTrip.date}</p>
-          <p>Duration: ${presentTrip.duration} days</p>
-          <p>Status: ${presentTrip.status}</p>
-          ${suggestedActivitiesParagraph}
-          <img class="destination-image" src=${presentTrip.destination.image} alt="${presentTrip.destination.alt}">
-        </article>
-      `;
-    });
-  },
-
-  displayUpcomingTrips(traveler) {
-    const travelersUpcomingTrips = traveler.getUpcomingTrips();
-    this.mainContainer.innerHTML = "<h2>Upcoming Trips:</h2>";
-    if (!travelersUpcomingTrips.length) {
-      this.mainContainer.innerHTML += `
-        <p>Nothing to see here.</p> 
-        <p>Go book a new trip to get away today!</p>`;
-    }
-    travelersUpcomingTrips.forEach((upcomingTrip) => {
-      let suggestedActivitiesParagraph = '';
-      if (upcomingTrip.suggestedActivities.length) {
-        suggestedActivitiesParagraph = `
-          <p>Suggested Activities: ${upcomingTrip.suggestedActivities}</p>
-        `;
-      }
-
-      this.mainContainer.innerHTML += `
-        <article class="trip-container">
-          <p>Destination: ${upcomingTrip.destination.destination}</p>
-          <p>Number of travelers: ${upcomingTrip.travelers}</p>
-          <p>Date: ${upcomingTrip.date}</p>
-          <p>Duration: ${upcomingTrip.duration} days</p>
-          <p>Status: ${upcomingTrip.status}</p>
-          ${suggestedActivitiesParagraph}
-          <img class="destination-image" src=${upcomingTrip.destination.image} alt="${upcomingTrip.destination.alt}">
-        </article>
-      `;
-    });
-  }, 
-
-  displayPendingTrips(traveler) {
-    const travelersPendingTrips = traveler.getPendingTrips();
-    this.mainContainer.innerHTML = "<h2>Pending Trips:</h2>";
-    if (!travelersPendingTrips.length) {
-      this.mainContainer.innerHTML += `
-        <p>Nothing to see here.</p> 
-        <p>Go book a new trip to get away today!</p>`;
-    }
-    travelersPendingTrips.forEach((pendingTrip) => {
-      let suggestedActivitiesParagraph = '';
-      if (pendingTrip.suggestedActivities.length) {
-        suggestedActivitiesParagraph = `
-          <p>Suggested Activities: ${pendingTrip.suggestedActivities}</p>
-        `;
-      }
-
-      this.mainContainer.innerHTML += `
-        <article class="trip-container">
-          <p>Destination: ${pendingTrip.destination.destination}</p>
-          <p>Number of travelers: ${pendingTrip.travelers}</p>
-          <p>Date: ${pendingTrip.date}</p>
-          <p>Duration: ${pendingTrip.duration} days</p>
-          <p>Status: ${pendingTrip.status}</p>
-          ${suggestedActivitiesParagraph}
-          <img class="destination-image" src=${pendingTrip.destination.image} alt="${pendingTrip.destination.alt}">
-        </article>
-      `;
-    });
-  }, 
 
   displayTravelExpenses(totalTravelExpensesThisYear) {
     this.mainContainer.innerHTML = `

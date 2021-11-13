@@ -63,23 +63,23 @@ addNewTripButton.addEventListener('click', () => {
 
 const pastTripsButton = document.querySelector('#pastTripsButton');
 pastTripsButton.addEventListener('click', () => {
-  domUpdates.displayPastTrips(traveler);
+  domUpdates.displayTrips(traveler.getPastTrips(), "Past");
 });
 
 
 const presentTripsButton = document.querySelector('#presentTripsButton');
 presentTripsButton.addEventListener('click', () => {
-  domUpdates.displayPresentTrips(traveler);
+  domUpdates.displayTrips(traveler.getPresentTrips(), "Present");
 });
 
 const upcomingTripsButton = document.querySelector('#upcomingTripsButton');
 upcomingTripsButton.addEventListener('click', () => {
-  domUpdates.displayUpcomingTrips(traveler);
+  domUpdates.displayTrips(traveler.getUpcomingTrips(), "Upcoming");
 });
 
 const pendingTripsButton = document.querySelector('#pendingTripsButton');
 pendingTripsButton.addEventListener('click', () => {
-  domUpdates.displayPendingTrips(traveler);
+  domUpdates.displayTrips(traveler.getPendingTrips(), "Pending");
 })
 
 const travelExpensesButton = document.querySelector('#travelExpensesButton');
