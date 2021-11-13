@@ -23,7 +23,7 @@ body {
   .h1-container {
     align-items: center;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-content: space-between;
     width: 100%;
     
@@ -55,21 +55,28 @@ body {
     }
   }
 
-  .add-new-trip-container {
+  .main-container {
     margin: auto;
     background: #BED2D5;
     height: 450px;
     opacity: 0.78;
     width: 650px;
     line-height: 30px;
+    overflow-y: scroll;
 
     .new-trip-form {
-
       label {
         display: block;
       }
-    
+    }
+
+    .trip-container {
+      
+      .destination-image {
+        height: 200px;
+        width: 300px;
+      }
     }
   }
-  
 }
+

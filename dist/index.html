@@ -10,42 +10,19 @@
 <body>
   <div class="h1-container">
     <h1>Travel Tracker</h1>
+    <p id="welcomeTravelerMsg" class="h1-welcom-msg"></p>
     <img class="h1-user-icon" src="images/user-icon.svg" alt="black user-icon">
   </div>
   <nav class="nav-container">
-    <button class="nav-button" id="addNewTrip">+Add new trip</button>
-    <button class="nav-button" id="pastTrips">Past trips</button>
-    <button class="nav-button" id="presentTrips">Present trips</button>
-    <button class="nav-button" id="upcomingTrips">Upcoming trips</button>
-    <button class="nav-button" id="pendingTrips">Pending trips</button>
-    <button class="nav-button" id="travelExpenses">Travel Expenses</button>
+    <button class="nav-button" id="addNewTripButton">+Add new trip</button>
+    <button class="nav-button" id="pastTripsButton">Past trips</button>
+    <button class="nav-button" id="presentTripsButton">Present trips</button>
+    <button class="nav-button" id="upcomingTripsButton">Upcoming trips</button>
+    <button class="nav-button" id="pendingTripsButton">Pending trips</button>
+    <button class="nav-button" id="travelExpensesButton">Travel Expenses</button>
   </nav>
-  <div id="addNewTripFormContainer" class="add-new-trip-container">
-    <form id="newTripInputForm" class="new-trip-form">
-      <p>Add New Trip</p>
-      <div>
-        <label for="date">Date</label>
-        <input id="date" type="date">
-      </div>
-      <div>
-        <label for="duration">Duration</label>
-        <input id="duration" type="number">
-      </div>
-      <div>
-        <label for="number-of-travelers">Number of Travelers</label>
-        <input id="number-of-travelers" type="number">
-      </div>
-      <div>
-        <label for="destination">Destination</label>
-        <input id="destination" type="text">
-      </div>
-      <div>
-        <label for="estimated-cost">Estimated Cost</label>
-        <p id="estimated-cost" type="number">
-      </div>
-    </form>
-  </div>
-  
+  <main class="main-container">
+  </main>  
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 
