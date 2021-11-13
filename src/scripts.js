@@ -60,7 +60,7 @@ pastTripsButton.addEventListener('click', () => {
   domUpdates.displayPastTrips(traveler);
 });
 
-const addNewTripButton = document.querySelector('#addNewTripButton');
-addNewTripButton.addEventListener('click', () => {
-  domUpdates.displayNewTripForm();
+const presentTripsButton = document.querySelector('#presentTripsButton');
+presentTripsButton.addEventListener('click', () => {
+  domUpdates.displayPresentTrips(traveler);
 });
