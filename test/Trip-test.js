@@ -71,6 +71,6 @@ describe('Trip', () => {
 
   it('should calculate the total cost for a trip (travel agent\'s fee included)', function() {
     const result = trip.calculateCost();
-    expect(result).to.equal(5819);
+    expect(result).to.equal(5819.00);
   });
 });
