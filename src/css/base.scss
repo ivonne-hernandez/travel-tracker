@@ -71,12 +71,16 @@ body {
     }
 
     .trip-container {
-      
       .destination-image {
         height: 200px;
         width: 300px;
       }
     }
+
+    .submit-trip-request-button:disabled {
+      cursor: not-allowed;
+    }
+
   }
 }
 
