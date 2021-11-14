@@ -23,6 +23,7 @@ import domUpdates from './domUpdates';
 
 let traveler;
 let userId = 44;
+let allDestinations;
 
 const fetchAll = () => {
   const singleTravelerDataPromise = fetchSingleTravelerData(userId);
@@ -37,6 +38,7 @@ const fetchAll = () => {
       const tripsForTraveler = getTripsForTraveler(singleTravelerData, allTripsData, allDestinationData);
       traveler = new Traveler(singleTravelerData, tripsForTraveler);
       domUpdates.displayTravelerWelcomeMsg(traveler);
+      allDestinations = allDestinationData;
     })
 }
 
@@ -58,7 +60,7 @@ window.addEventListener('load', fetchAll);
 
 const addNewTripButton = document.querySelector('#addNewTripButton');
 addNewTripButton.addEventListener('click', () => {
-  domUpdates.displayNewTripForm();
+  domUpdates.displayNewTripForm(allDestinations);
 });
 
 const pastTripsButton = document.querySelector('#pastTripsButton');
