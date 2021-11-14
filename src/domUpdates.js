@@ -62,7 +62,7 @@ let domUpdates = {
     const submitTripRequestButton = document.querySelector('#submitTripRequestButton');
     submitTripRequestButton.addEventListener('click', function(event) {
       event.preventDefault();
-      domUpdates.submitNewTripRequest(traveler, allTrips);
+      domUpdates.submitNewTripRequest(traveler, allTrips, allDestinations);
     });
   },
 
@@ -111,20 +111,15 @@ let domUpdates = {
     estimatedCost.innerHTML = `<p>Estimated Cost: $${estimatedTripTotal.toFixed(2)} (10% travel agent fee included)</p>`;
   },
 
-  submitNewTripRequest(traveler, allTrips) {
-    const tripId = allTrips.reduce((max, trip) => {
-      if (trip.id > max) {
-        max = trip.id;
-      }
-      return max;
-    }, 0);
+  submitNewTripRequest(traveler, allTrips, allDestinations) {
+    const maxTripId = Math.max(...allTrips.map(trip => trip.id));
     const numberOfTravelers = Number(document.querySelector('#numberOfTravelersInput').value);
     const dateInput = document.querySelector('#dateInput').value.split('-').join('/');
     const duration = Number(document.querySelector('#durationInput').value);
     const destinationId = Number(document.querySelector('#destinationNameInput').value);
-  
+    
     const newTrip = {
-      "id": tripId + 1,
+      "id": maxTripId + 1,
       "userID": traveler.userId,
       "destinationID": destinationId,
       "travelers": numberOfTravelers,
@@ -135,9 +130,20 @@ let domUpdates = {
     }
     
     return postNewTrip(newTrip)
-      .then(data => {
-        console.log(`${data.message}`, newTrip);
+      .then(response => {
+        const matchingTripDestination = allDestinations.find(destination => destination.id === response.newTrip.destinationID);
+        traveler.trips.push(new Trip(response.newTrip, new Destination(matchingTripDestination)));
+        allTrips.push(response.newTrip);
+        
+        this.displayTripRequestSuccess();
       })
+  },
+
+  displayTripRequestSuccess() {
+    this.mainContainer.innerHTML = `
+    <p>Your new trip request has been successfully submitted.</p> 
+    <p>Its status is pending travel agent approval.</p>
+    `;
   },
 
   displayTrips(trips, type) {
