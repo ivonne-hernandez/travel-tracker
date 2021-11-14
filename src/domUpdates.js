@@ -9,7 +9,6 @@ let domUpdates = {
     welcomeTraveler.innerText = `Welcome ${traveler.name}`
   },
 
-
   displayNewTripForm(allDestinations) {
     const listOfAllDestinationNames = allDestinations
       .map(destination => {
@@ -97,7 +96,7 @@ let domUpdates = {
       "duration": duration,
       "status": "pending",
       "suggestedActivities": []
-    }
+    };
     const trip = new Trip(tripForEstimationPurposesOnly, new Destination(matchingTripDestination));
     const estimatedTripTotal = trip.calculateCost();
 
@@ -106,7 +105,7 @@ let domUpdates = {
 
   displayEstimatedTripCost(estimatedTripTotal) {
     const estimatedCost = document.querySelector('#estimatedCost');
-    estimatedCost.innerHTML = `<p>Estimated Cost: $${estimatedTripTotal.toLocaleString()}</p>`
+    estimatedCost.innerHTML = `<p>Estimated Cost: $${estimatedTripTotal.toLocaleString()} (10% fee included)</p>`;
   },
 
   displayTrips(trips, type) {
@@ -146,12 +145,6 @@ let domUpdates = {
     `;
   }
 
-//  I should be able to make a trip request:
-// I will select a date, duration, number of travelers and choose from a list of destinations
-  //Need to look into dropdown list that user can select from for destinations
-// After making these selections, I should see an estimated cost (with a 10% travel agent fee) for the trip.
-  //Need to change the Estimated Cost to a disabled button, once all of the input fields are valid
-  //the user can click on the "Get Estimated Cost" button to get the cost (event listener on this button that calculates and displays the cost on the DOM upon click)
   //We also need a submit trip request button that is disabled at the same time as the "est cost button"
 // Once I submit the trip request, it will show on my dashboard as “pending” so that the travel agency can approve or deny it.
   //once the "submit trip request" button is pressed (event listener on this button) there should be a POST request
