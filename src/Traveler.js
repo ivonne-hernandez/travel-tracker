@@ -45,5 +45,16 @@ class Traveler {
     const pendingTrips = this.trips.filter(trip => trip.status === `pending`);
     return pendingTrips;
   } 
+
+  getTravelExpensesForYear(year = new Date().getFullYear()) {
+    const totalExpensesForYear = this.trips
+      .reduce((totalCost, trip) => {
+        if (new Date(trip.date).getFullYear() === year) {
+          totalCost += trip.calculateCost();
+        }
+        return totalCost;
+      }, 0);
+    return totalExpensesForYear;
+  }
 }
 export default Traveler;

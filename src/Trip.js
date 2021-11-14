@@ -14,7 +14,7 @@ class Trip {
     const totalFlightCost = this.destination.estimatedFlightCostPerPerson * this.travelers;
     const travelAgentsFeeIncluded = 1.10;
     const totalTripCost = (totalLodgingCost + totalFlightCost) * travelAgentsFeeIncluded;
-    return Math.floor(totalTripCost);
+    return Number(totalTripCost.toFixed(2));
   }
 }
 

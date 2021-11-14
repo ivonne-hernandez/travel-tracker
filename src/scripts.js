@@ -19,6 +19,7 @@ import {
 import Traveler from './Traveler';
 import Trip from './Trip';
 import Destination from './Destination';
+import domUpdates from './domUpdates';
 
 let traveler;
 let userId = 44;
@@ -35,6 +36,7 @@ const fetchAll = () => {
       const allDestinationData = data[2].destinations;
       const tripsForTraveler = getTripsForTraveler(singleTravelerData, allTripsData, allDestinationData);
       traveler = new Traveler(singleTravelerData, tripsForTraveler);
+      domUpdates.displayTravelerWelcomeMsg(traveler);
     })
 }
 
@@ -53,3 +55,33 @@ const findDestinationForTrip = (trip, allDestinationData) => {
 }
 
 window.addEventListener('load', fetchAll);
+
+const addNewTripButton = document.querySelector('#addNewTripButton');
+addNewTripButton.addEventListener('click', () => {
+  domUpdates.displayNewTripForm();
+});
+
+const pastTripsButton = document.querySelector('#pastTripsButton');
+pastTripsButton.addEventListener('click', () => {
+  domUpdates.displayTrips(traveler.getPastTrips(), "Past");
+});
+
+const presentTripsButton = document.querySelector('#presentTripsButton');
+presentTripsButton.addEventListener('click', () => {
+  domUpdates.displayTrips(traveler.getPresentTrips(), "Present");
+});
+
+const upcomingTripsButton = document.querySelector('#upcomingTripsButton');
+upcomingTripsButton.addEventListener('click', () => {
+  domUpdates.displayTrips(traveler.getUpcomingTrips(), "Upcoming");
+});
+
+const pendingTripsButton = document.querySelector('#pendingTripsButton');
+pendingTripsButton.addEventListener('click', () => {
+  domUpdates.displayTrips(traveler.getPendingTrips(), "Pending");
+});
+
+const travelExpensesButton = document.querySelector('#travelExpensesButton');
+travelExpensesButton.addEventListener('click', () => {
+  domUpdates.displayTravelExpenses(traveler.getTravelExpensesForYear());
+});

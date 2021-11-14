@@ -1,14 +1,23 @@
 import { expect } from "chai";
 import Traveler from "../src/Traveler";
+import Trip from "../src/Trip";
+import Destination from "../src/Destination";
+
+import {
+  tripsForTraveler,
+  pastTripsBasedOnTodaysDate,
+  presentTripsBasedOnTodaysDate,
+  upcomingTripsBasedOnTodaysDate,
+  pendingTrips, 
+  matchingTripDestinations
+} from './Traveler-test-data';
 
 describe('Traveler', () => {
   let traveler;
   let singleTravelerInformation;
-  let tripsForTraveler;
-  let pastTripsBasedOnTodaysDate;
-  let presentTripsBasedOnTodaysDate;
-  let upcomingTripsBasedOnTodaysDate;
-  let pendingTrips;
+  let allTripsForSingleTraveler = tripsForTraveler;
+  let instantiatedTripsForTraveler;
+  let allDestinationsForSingleTraveler = matchingTripDestinations;
 
   beforeEach(function() {
     singleTravelerInformation = {
@@ -16,183 +25,15 @@ describe('Traveler', () => {
       "name": "Selene Kleyn",
       "travelerType": "relaxer"
     }
-
-    tripsForTraveler = [
-      {
-        "id": 12,
-        "userID": 33,
-        "destinationID": 33,
-        "travelers": 6,
-        "date": "2022/10/17",
-        "duration": 6,
-        "status": "approved",
-        "suggestedActivities": []
-      },
-      {
-        "id": 30,
-        "userID": 33,
-        "destinationID": 29,
-        "travelers": 1,
-        "date": "2020/07/17",
-        "duration": 5,
-        "status": "approved",
-        "suggestedActivities": []
-      },
-      {
-        "id": 57,
-        "userID": 33,
-        "destinationID": 17,
-        "travelers": 2,
-        "date": "2019/07/04",
-        "duration": 20,
-        "status": "approved",
-        "suggestedActivities": []
-      },
-      {
-        "id": 118,
-        "userID": 33,
-        "destinationID": 19,
-        "travelers": 5,
-        "date": "2021/02/09",
-        "duration": 5,
-        "status": "approved",
-        "suggestedActivities": []
-      },
-      {
-        "id": 136,
-        "userID": 33,
-        "destinationID": 24,
-        "travelers": 5,
-        "date": "2021/11/12",
-        "duration": 20,
-        "status": "approved",
-        "suggestedActivities": []
-      },
-      {
-        "id": 157,
-        "userID": 33,
-        "destinationID": 41,
-        "travelers": 1,
-        "date": "2021/11/12",
-        "duration": 11,
-        "status": "approved",
-        "suggestedActivities": []
-      },
-      {
-        "id": 164,
-        "userID": 33,
-        "destinationID": 25,
-        "travelers": 4,
-        "date": "2022/11/30",
-        "duration": 7,
-        "status": "approved",
-        "suggestedActivities": []
-      },
-      {
-        "id": 178,
-        "userID": 33,
-        "destinationID": 40,
-        "travelers": 2,
-        "date": "2019/12/25",
-        "duration": 16,
-        "status": "pending",
-        "suggestedActivities": []
-      }
-    ];
-
-    pastTripsBasedOnTodaysDate = [
-      {
-        "id": 30,
-        "userID": 33,
-        "destinationID": 29,
-        "travelers": 1,
-        "date": "2020/07/17",
-        "duration": 5,
-        "status": "approved",
-        "suggestedActivities": []
-      },
-      {
-        "id": 57,
-        "userID": 33,
-        "destinationID": 17,
-        "travelers": 2,
-        "date": "2019/07/04",
-        "duration": 20,
-        "status": "approved",
-        "suggestedActivities": []
-      },
-      {
-        "id": 118,
-        "userID": 33,
-        "destinationID": 19,
-        "travelers": 5,
-        "date": "2021/02/09",
-        "duration": 5,
-        "status": "approved",
-        "suggestedActivities": []
-      }
-    ];
-
-    presentTripsBasedOnTodaysDate = [
-      {
-        "id": 136,
-        "userID": 33,
-        "destinationID": 24,
-        "travelers": 5,
-        "date": "2021/11/12",
-        "duration": 20,
-        "status": "approved",
-        "suggestedActivities": []
-      },
-      {
-        "id": 157,
-        "userID": 33,
-        "destinationID": 41,
-        "travelers": 1,
-        "date": "2021/11/12",
-        "duration": 11,
-        "status": "approved",
-        "suggestedActivities": []
-      }
-    ];
-
-    upcomingTripsBasedOnTodaysDate = [
-      {
-        "id": 12,
-        "userID": 33,
-        "destinationID": 33,
-        "travelers": 6,
-        "date": "2022/10/17",
-        "duration": 6,
-        "status": "approved",
-        "suggestedActivities": []
-      },
-      {
-        "id": 164,
-        "userID": 33,
-        "destinationID": 25,
-        "travelers": 4,
-        "date": "2022/11/30",
-        "duration": 7,
-        "status": "approved",
-        "suggestedActivities": []
-      }
-    ];
-
-    pendingTrips = [
-      {
-        "id": 178,
-        "userID": 33,
-        "destinationID": 40,
-        "travelers": 2,
-        "date": "2019/12/25",
-        "duration": 16,
-        "status": "pending",
-        "suggestedActivities": []
-      }
-    ];
-
-    traveler = new Traveler(singleTravelerInformation, tripsForTraveler);
+    
+    instantiatedTripsForTraveler = allTripsForSingleTraveler
+      .map((trip) => {
+        const matchingDestination = allDestinationsForSingleTraveler.find(destination => trip.destinationID === destination.id)
+        const instantiatedTrip = new Trip(trip, new Destination(matchingDestination));
+        return instantiatedTrip;
+    });
+  
+    traveler = new Traveler(singleTravelerInformation, instantiatedTripsForTraveler);
   });
 
   it('should be a function', function() {
@@ -216,27 +57,57 @@ describe('Traveler', () => {
   });
 
   it('should have an array of trips', function() {
-    expect(traveler.trips).to.deep.equal(tripsForTraveler);
+    const expected = tripsForTraveler.map(trip => {
+      const matchingDestination = allDestinationsForSingleTraveler.find(destination => trip.destinationID === destination.id)
+      const instantiatedTrip = new Trip(trip, new Destination(matchingDestination));
+      return instantiatedTrip;
+    })
+    expect(traveler.trips).to.deep.equal(expected);
   });
 
   it('should return the past trips based on today\'s date', function() {
+    const expected = pastTripsBasedOnTodaysDate.map(trip => {
+      const matchingDestination = allDestinationsForSingleTraveler.find(destination => trip.destinationID === destination.id)
+      const instantiatedTrip = new Trip(trip, new Destination(matchingDestination));
+      return instantiatedTrip;
+    });
     const result = traveler.getPastTrips(new Date("2021/11/12"));
-    expect(result).to.deep.equal(pastTripsBasedOnTodaysDate);
+    expect(result).to.deep.equal(expected);
   });
 
   it('should return the present trips based on today\'s date', function() {
+    const expected = presentTripsBasedOnTodaysDate.map(trip => {
+      const matchingDestination = allDestinationsForSingleTraveler.find(destination => trip.destinationID === destination.id)
+      const instantiatedTrip = new Trip(trip, new Destination(matchingDestination));
+      return instantiatedTrip;
+    });
     const result = traveler.getPresentTrips(new Date("2021/11/12"));
-    expect(result).to.deep.equal(presentTripsBasedOnTodaysDate)
+    expect(result).to.deep.equal(expected);
   });
 
   it('should return the upcoming trips based on today\'s date', function() {
+    const expected = upcomingTripsBasedOnTodaysDate.map(trip => {
+      const matchingDestination = allDestinationsForSingleTraveler.find(destination => trip.destinationID === destination.id)
+      const instantiatedTrip = new Trip(trip, new Destination(matchingDestination));
+      return instantiatedTrip;
+    });
     const result = traveler.getUpcomingTrips(new Date("2021/11/12"));
-    expect(result).to.deep.equal(upcomingTripsBasedOnTodaysDate)
+    expect(result).to.deep.equal(expected);
   });
   
   it('should return the pending trips', function() {
+    const expected = pendingTrips.map(trip => {
+      const matchingDestination = allDestinationsForSingleTraveler.find(destination => trip.destinationID === destination.id)
+      const instantiatedTrip = new Trip(trip, new Destination(matchingDestination));
+      return instantiatedTrip;
+    });
     const result = traveler.getPendingTrips();
-    expect(result).to.deep.equal(pendingTrips)
+    expect(result).to.deep.equal(expected);
+  });
+
+  it('should return the total travel expenses for a given year', function() {
+    const result = traveler.getTravelExpensesForYear(2021);
+    expect(result).to.equal(16720);
   });
 });
 
