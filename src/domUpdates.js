@@ -1,5 +1,8 @@
 import Destination from "./Destination";
 import Trip from "./Trip";
+import {
+  postNewTrip
+} from './apiCalls';
 
 let domUpdates = {
   mainContainer: document.querySelector('.main-container'),
@@ -9,7 +12,7 @@ let domUpdates = {
     welcomeTraveler.innerText = `Welcome ${traveler.name}`
   },
 
-  displayNewTripForm(allDestinations) {
+  displayNewTripForm(traveler, allTrips, allDestinations) {
     const listOfAllDestinationNames = allDestinations
       .map(destination => {
         const instantiatedDestination = new Destination(destination);
@@ -45,10 +48,10 @@ let domUpdates = {
       </form>
     `;
     
-    this.addEventListenersForForm(allDestinations);
+    this.addEventListenersForForm(traveler, allTrips, allDestinations);
   }, 
 
-  addEventListenersForForm(allDestinations) {
+  addEventListenersForForm(traveler, allTrips, allDestinations) {
     const newTripInputForm = document.querySelector('#newTripInputForm');
     newTripInputForm.addEventListener('input', function() {
       if (domUpdates.areValidUserInputFields()) {
@@ -59,7 +62,7 @@ let domUpdates = {
     const submitTripRequestButton = document.querySelector('#submitTripRequestButton');
     submitTripRequestButton.addEventListener('click', function(event) {
       event.preventDefault();
-      domUpdates.postNewTripRequest();
+      domUpdates.submitNewTripRequest(traveler, allTrips);
     });
   },
 
@@ -105,7 +108,36 @@ let domUpdates = {
 
   displayEstimatedTripCost(estimatedTripTotal) {
     const estimatedCost = document.querySelector('#estimatedCost');
-    estimatedCost.innerHTML = `<p>Estimated Cost: $${estimatedTripTotal.toLocaleString()} (10% fee included)</p>`;
+    estimatedCost.innerHTML = `<p>Estimated Cost: $${estimatedTripTotal.toFixed(2)} (10% travel agent fee included)</p>`;
+  },
+
+  submitNewTripRequest(traveler, allTrips) {
+    const tripId = allTrips.reduce((max, trip) => {
+      if (trip.id > max) {
+        max = trip.id;
+      }
+      return max;
+    }, 0);
+    const numberOfTravelers = Number(document.querySelector('#numberOfTravelersInput').value);
+    const dateInput = document.querySelector('#dateInput').value.split('-').join('/');
+    const duration = Number(document.querySelector('#durationInput').value);
+    const destinationId = Number(document.querySelector('#destinationNameInput').value);
+  
+    const newTrip = {
+      "id": tripId + 1,
+      "userID": traveler.userId,
+      "destinationID": destinationId,
+      "travelers": numberOfTravelers,
+      "date": dateInput,
+      "duration": duration,
+      "status": "pending",
+      "suggestedActivities": [] 
+    }
+    
+    return postNewTrip(newTrip)
+      .then(data => {
+        console.log(`${data.message}`, newTrip);
+      })
   },
 
   displayTrips(trips, type) {
@@ -144,12 +176,6 @@ let domUpdates = {
       <p>$${totalTravelExpensesThisYear.toFixed(2)} (10% fee included)</p>
     `;
   }
-
-  //We also need a submit trip request button that is disabled at the same time as the "est cost button"
-// Once I submit the trip request, it will show on my dashboard as “pending” so that the travel agency can approve or deny it.
-  //once the "submit trip request" button is pressed (event listener on this button) there should be a POST request
-  //and then a fetch call that will "refresh" the data s.t. the trip is now in the "Pending Trips" section
-  
 }
 
 
