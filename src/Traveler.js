@@ -48,12 +48,12 @@ class Traveler {
 
   getTravelExpensesForYear(year = new Date().getFullYear()) {
     const totalExpensesForYear = this.trips
-    .reduce((totalCost, trip) => {
-      if (new Date(trip.date).getFullYear() === year) {
-        totalCost += trip.calculateCost();
-      }
-      return totalCost;
-    }, 0);
+      .reduce((totalCost, trip) => {
+        if (new Date(trip.date).getFullYear() === year) {
+          totalCost += trip.calculateCost();
+        }
+        return totalCost;
+      }, 0);
     return totalExpensesForYear;
   }
 }
