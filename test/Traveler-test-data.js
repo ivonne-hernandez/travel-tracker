@@ -240,7 +240,6 @@ const matchingTripDestinations = [
   }
 ];
 
-
 module.exports = {
   tripsForTraveler,
   pastTripsBasedOnTodaysDate,
