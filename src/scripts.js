@@ -66,7 +66,6 @@ pastTripsButton.addEventListener('click', () => {
   domUpdates.displayTrips(traveler.getPastTrips(), "Past");
 });
 
-
 const presentTripsButton = document.querySelector('#presentTripsButton');
 presentTripsButton.addEventListener('click', () => {
   domUpdates.displayTrips(traveler.getPresentTrips(), "Present");
