@@ -13,7 +13,7 @@ import './images/user-icon.svg';
 import {
   fetchSingleTravelerData, 
   fetchAllTrips, 
-  fetchAllDestinations
+  fetchAllDestinations,
 } from './apiCalls';
 
 import Traveler from './Traveler';
@@ -24,6 +24,7 @@ import domUpdates from './domUpdates';
 let traveler;
 let userId = 44;
 let allDestinations;
+let allTrips;
 
 const fetchAll = () => {
   const singleTravelerDataPromise = fetchSingleTravelerData(userId);
@@ -33,12 +34,11 @@ const fetchAll = () => {
   Promise.all([singleTravelerDataPromise, allTripsDataPromise, allDestinationsDataPromise])
     .then(data => {
       const singleTravelerData = data[0];
-      const allTripsData = data[1].trips;
-      const allDestinationData = data[2].destinations;
-      const tripsForTraveler = getTripsForTraveler(singleTravelerData, allTripsData, allDestinationData);
+      allTrips = data[1].trips;
+      allDestinations = data[2].destinations;
+      const tripsForTraveler = getTripsForTraveler(singleTravelerData, allTrips, allDestinations);
       traveler = new Traveler(singleTravelerData, tripsForTraveler);
       domUpdates.displayTravelerWelcomeMsg(traveler);
-      allDestinations = allDestinationData;
     })
 }
 
@@ -60,7 +60,7 @@ window.addEventListener('load', fetchAll);
 
 const addNewTripButton = document.querySelector('#addNewTripButton');
 addNewTripButton.addEventListener('click', () => {
-  domUpdates.displayNewTripForm(allDestinations);
+  domUpdates.displayNewTripForm(traveler, allTrips, allDestinations);
 });
 
 const pastTripsButton = document.querySelector('#pastTripsButton');
