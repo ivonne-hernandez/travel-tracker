@@ -79,9 +79,9 @@ upcomingTripsButton.addEventListener('click', () => {
 const pendingTripsButton = document.querySelector('#pendingTripsButton');
 pendingTripsButton.addEventListener('click', () => {
   domUpdates.displayTrips(traveler.getPendingTrips(), "Pending");
-})
+});
 
 const travelExpensesButton = document.querySelector('#travelExpensesButton');
 travelExpensesButton.addEventListener('click', () => {
   domUpdates.displayTravelExpenses(traveler.getTravelExpensesForYear());
-})
+});
