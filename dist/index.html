@@ -8,12 +8,12 @@
   <title>Travel Tracker</title>
 </head>
 <body>
-  <div class="h1-container">
-    <h1>Travel Tracker</h1>
+  <div class="h1-container hidden">
+    <h1 class="travel-tracker-h1">Travel Tracker</h1>
     <p id="welcomeTravelerMsg" class="h1-welcom-msg"></p>
     <img class="h1-user-icon" src="images/user-icon.svg" alt="black user-icon">
   </div>
-  <nav class="nav-container">
+  <nav class="nav-container hidden">
     <button class="nav-button" id="addNewTripButton">+Add new trip</button>
     <button class="nav-button" id="pastTripsButton">Past trips</button>
     <button class="nav-button" id="presentTripsButton">Present trips</button>
@@ -21,8 +21,25 @@
     <button class="nav-button" id="pendingTripsButton">Pending trips</button>
     <button class="nav-button" id="travelExpensesButton">Travel Expenses</button>
   </nav>
-  <main class="main-container">
+  <main class="main-container hidden"> 
   </main>  
+  <div class="login-container">
+    <h1 class="login-h1">Travel Tracker Login</h1>
+    <img class="h1-user-icon" src="images/user-icon.svg" alt="black user-icon">
+    <form id="loginForm" class="login-form">
+      <div>
+        <label for="username">Username:</label>
+        <input id="usernameInput" type="text" required>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input id="passwordInput" type="password" required
+      </div>
+    </form>
+    <div class="login-button-container">
+      <button class="login-button" id="loginButton" disabled>Login</button>
+    </div>
+  </div> 
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 
