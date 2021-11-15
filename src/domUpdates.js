@@ -134,7 +134,7 @@ let domUpdates = {
         const matchingTripDestination = allDestinations.find(destination => destination.id === response.newTrip.destinationID);
         traveler.trips.push(new Trip(response.newTrip, new Destination(matchingTripDestination)));
         allTrips.push(response.newTrip);
-        
+    
         this.displayTripRequestSuccess();
       })
   },
@@ -151,7 +151,8 @@ let domUpdates = {
     if (!trips.length) {
       this.mainContainer.innerHTML += `
         <p>Nothing to see here.</p> 
-        <p>Go book a new trip to get away today!</p>`;
+        <p>Go book a new trip to get away today!</p>
+      `;
     }
 
     trips.forEach((trip) => {
