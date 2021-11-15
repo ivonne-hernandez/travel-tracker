@@ -82,5 +82,32 @@ body {
     }
 
   }
+
+  .login-container {
+    display: grid;
+    justify-content: space-between;
+    width: 100%;
+
+    .h1-user-icon {
+      justify-self: center;
+      margin-right: 30px;
+      width: 70px;
+      height: 70px;
+    }
+
+    .login-form {
+      label {
+        display: block;
+      }
+    }
+    .login-button-container {
+      margin-top: 10px;
+    }
+  }
+
+  .hidden {
+    display: none;
+  }
 }
+
 
