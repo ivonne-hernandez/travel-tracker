@@ -6,6 +6,16 @@ import {
 
 let domUpdates = {
   mainContainer: document.querySelector('.main-container'),
+  loginContainer: document.querySelector('.login-container'),
+  h1Container: document.querySelector('.h1-container'),
+  navContainer: document.querySelector('.nav-container'),
+  
+  hideLoginPage() {
+    this.loginContainer.classList.add('hidden');
+    this.mainContainer.classList.remove('hidden');
+    this.h1Container.classList.remove('hidden');
+    this.navContainer.classList.remove('hidden');
+  },  
 
   displayTravelerWelcomeMsg(traveler) {
     const welcomeTraveler = document.querySelector('#welcomeTravelerMsg');
@@ -180,15 +190,10 @@ let domUpdates = {
   displayTravelExpenses(totalTravelExpensesThisYear) {
     this.mainContainer.innerHTML = `
       <h2>Total Travel Expenses for ${new Date().getFullYear()}:</h2>
-      <p>$${totalTravelExpensesThisYear.toFixed(2)} (10% fee included)</p>
+      <p>$${totalTravelExpensesThisYear.toFixed(2)} (10% travel agent fee included)</p>
     `;
   }
 }
-
-
-
-
-
 
 export default domUpdates;
 
