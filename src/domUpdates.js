@@ -17,6 +17,11 @@ let domUpdates = {
     this.navContainer.classList.remove('hidden');
   },
 
+  showGetErrorMsg(error) {
+    const loginErrorMsg = document.querySelector('#loginErrorMsg');
+    loginErrorMsg.innerText = `Please check your network connection. ${error}`;
+  },
+
   displayTravelerWelcomeMsg(traveler) {
     const welcomeTraveler = document.querySelector('#welcomeTravelerMsg');
     welcomeTraveler.innerText = `Welcome, ${traveler.name}`;

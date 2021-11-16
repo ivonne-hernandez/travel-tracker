@@ -40,6 +40,7 @@ const fetchAll = (userId) => {
       domUpdates.hideLoginPage();
       domUpdates.displayTravelerWelcomeMsg(traveler);
     })
+    .catch(error => domUpdates.showGetErrorMsg(error));
 }
 
 const getTripsForTraveler = (singleTravelerData, allTripsData, allDestinationData) => {
