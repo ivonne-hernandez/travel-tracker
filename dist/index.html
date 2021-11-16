@@ -28,14 +28,15 @@
     <img class="h1-user-icon" src="images/user-icon.svg" alt="black user-icon">
     <form id="loginForm" class="login-form">
       <div>
-        <label for="username">Username:</label>
+        <label for="usernameInput">Username:</label>
         <input id="usernameInput" type="text" required>
       </div>
       <div>
-        <label for="password">Password:</label>
+        <label for="passwordInput">Password:</label>
         <input id="passwordInput" type="password" required>
       </div>
-      <button class="login-button" id="loginButton" disabled>Login</button>
+      <p class="login-error-msg hidden" id="loginErrorMsg"></p>
+      <button class="login-button" id="loginButton">Login</button>
     </form>
   </div> 
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
