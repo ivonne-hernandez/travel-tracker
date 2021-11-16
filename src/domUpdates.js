@@ -51,10 +51,10 @@ let domUpdates = {
           </select>
         </div>
         <div>
-          <label id="estimatedCost" for="estimated-cost">Estimated Cost</label>
+          <label id="estimatedCost" for="estimated-cost" class="estimated-cost">Estimated Cost</label>
         </div>
         <div>
-          <button class="submit-trip-request-button" id="submitTripRequestButton" disabled>Submit Trip Request</button>
+          <button class="submit-trip-request-button button-style" id="submitTripRequestButton" disabled>Submit Trip Request</button>
         </div>
       </form>
     `;
@@ -120,7 +120,7 @@ let domUpdates = {
   displayEstimatedTripCost(estimatedTripTotal) {
     this.mainContainer.classList.add('blue-background');
     const estimatedCost = document.querySelector('#estimatedCost');
-    estimatedCost.innerHTML = `<p>Estimated Cost: $${estimatedTripTotal.toFixed(2)} (10% travel agent fee included)</p>`;
+    estimatedCost.innerHTML = `<p class="estimated-cost">Estimated Cost: $${estimatedTripTotal.toFixed(2)} (10% travel agent fee included)</p>`;
   },
 
   submitNewTripRequest(traveler, allTrips, allDestinations) {
