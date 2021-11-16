@@ -10,7 +10,7 @@
 <body>
   <div class="h1-container hidden">
     <h1 class="travel-tracker-h1">Travel Tracker</h1>
-    <p id="welcomeTravelerMsg" class="h1-welcom-msg"></p>
+    <p id="welcomeTravelerMsg" class="h1-welcome-msg"></p>
     <img class="h1-user-icon" src="images/user-icon.svg" alt="black user-icon">
   </div>
   <nav class="nav-container hidden">
@@ -33,12 +33,10 @@
       </div>
       <div>
         <label for="password">Password:</label>
-        <input id="passwordInput" type="password" required
+        <input id="passwordInput" type="password" required>
       </div>
-    </form>
-    <div class="login-button-container">
       <button class="login-button" id="loginButton" disabled>Login</button>
-    </div>
+    </form>
   </div> 
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>

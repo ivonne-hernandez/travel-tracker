@@ -16,7 +16,7 @@ body {
   color: #000000;
   font-family: $primary-font;
   height: 100%;
-  margin: 20px;
+  padding: 20px;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   width: 100%;
 
@@ -32,6 +32,11 @@ body {
       margin-left: 30px;
     }
 
+    .h1-welcome-msg {
+      font-size: 25px;
+      margin: auto;
+    }
+
     .h1-user-icon {
       justify-self: end;
       margin-right: 30px;
@@ -44,33 +49,49 @@ body {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     justify-content: space-between;
-    margin: 40px 0px 40px 40px;
+    justify-items: center;
+    margin: 40px 0px 40px;
 
     .nav-button {
-      background-color: $grey-color;
+      background-color: #b2dded;
+      border: 1px solid black;
+      border-radius: 7px;
       font-family: $primary-font;
       font-size: 20px;
       height: 41px;
       width: 175px;
+       
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
   .main-container {
     margin: auto;
-    background: #BED2D5;
     height: 450px;
-    opacity: 0.78;
+    opacity: 0.90;
     width: 650px;
     line-height: 30px;
     overflow-y: scroll;
+    padding: 15px;
 
+    h2 {
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
     .new-trip-form {
+
       label {
         display: block;
+        font-size: 18px;
       }
     }
 
     .trip-container {
+      padding: 15px;
+      margin: 10px;
+
       .destination-image {
         height: 200px;
         width: 300px;
@@ -81,33 +102,74 @@ body {
       cursor: not-allowed;
     }
 
+    .submit-trip-request-button {
+      margin-top: 10px;
+      background-color: $grey-color;
+      border-radius: 7px;
+      font-family: $primary-font;
+      font-size: 18px;
+      height: 28px;
+      width: 175x;
+    }
+
   }
 
   .login-container {
-    display: grid;
-    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+
+    h1 {
+      font-size: 40px;
+    }
 
     .h1-user-icon {
       justify-self: center;
-      margin-right: 30px;
-      width: 70px;
-      height: 70px;
+      width: 80px;
+      height: 80px;
     }
 
     .login-form {
+      display: grid;
+      justify-items: center;
+      line-height: 25px;
+      grid-gap: 10px;
+
       label {
         display: block;
+        font-size: 18px;
+
       }
     }
-    .login-button-container {
+
+    .login-button {
       margin-top: 10px;
+      background-color: $grey-color;
+      border-radius: 7px;
+      font-family: $primary-font;
+      font-size: 18px;
+      height: 28px;
+      width: 90px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
   .hidden {
     display: none;
   }
+
+  p {
+    font-size: 18px;
+  }
 }
 
+.blue-background {
+  background: #75c1e1;
+  border-radius: 7px;
+}
 
