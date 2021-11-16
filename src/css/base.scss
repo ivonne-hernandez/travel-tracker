@@ -98,6 +98,12 @@ body {
         font-weight: $bold-font;
         padding-top: 10px;
       }
+
+      .post-error-msg {
+        color: red;
+        font-weight: $bold-font;
+        height: 15px;
+      }
     }
 
     .trip-container {
