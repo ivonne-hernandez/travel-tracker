@@ -60,6 +60,7 @@ let domUpdates = {
         </div>
         <div>
           <button class="submit-trip-request-button button-style" id="submitTripRequestButton" disabled>Submit Trip Request</button>
+          <p class="post-error-msg" id="postErrorMsg"></p>
         </div>
       </form>
     `;
@@ -69,7 +70,6 @@ let domUpdates = {
 
   addEventListenersForForm(traveler, allTrips, allDestinations) {
     const newTripInputForm = document.querySelector('#newTripInputForm');
-
     newTripInputForm.addEventListener('input', function() {
       if (domUpdates.areValidUserInputFields()) {
         domUpdates.getEstimatedTripCost(allDestinations);
@@ -155,9 +155,14 @@ let domUpdates = {
         const matchingTripDestination = allDestinations.find(destination => destination.id === response.newTrip.destinationID);
         traveler.trips.push(new Trip(response.newTrip, new Destination(matchingTripDestination)));
         allTrips.push(response.newTrip);
-    
         this.displayTripRequestSuccess();
       })
+      .catch(error => this.showPostErrorMsg(error));
+  },
+
+  showPostErrorMsg(error) {
+    const postErrorMsg = document.querySelector('#postErrorMsg');
+    postErrorMsg.innerHTML = `Please check your network connection. ${error}`;
   },
 
   displayTripRequestSuccess() {
