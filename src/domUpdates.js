@@ -15,14 +15,15 @@ let domUpdates = {
     this.mainContainer.classList.remove('hidden');
     this.h1Container.classList.remove('hidden');
     this.navContainer.classList.remove('hidden');
-  },  
+  },
 
   displayTravelerWelcomeMsg(traveler) {
     const welcomeTraveler = document.querySelector('#welcomeTravelerMsg');
-    welcomeTraveler.innerText = `Welcome ${traveler.name}`
+    welcomeTraveler.innerText = `Welcome, ${traveler.name}`;
   },
 
   displayNewTripForm(traveler, allTrips, allDestinations) {
+    this.mainContainer.classList.add('blue-background');
     const listOfAllDestinationNames = allDestinations
       .map(destination => {
         const instantiatedDestination = new Destination(destination);
@@ -50,10 +51,10 @@ let domUpdates = {
           </select>
         </div>
         <div>
-          <label id="estimatedCost" for="estimated-cost">Estimated Cost</label>
+          <label id="estimatedCost" for="estimated-cost" class="estimated-cost">Estimated Cost</label>
         </div>
         <div>
-          <button class="submit-trip-request-button" id="submitTripRequestButton" disabled>Submit Trip Request</button>
+          <button class="submit-trip-request-button button-style" id="submitTripRequestButton" disabled>Submit Trip Request</button>
         </div>
       </form>
     `;
@@ -117,8 +118,9 @@ let domUpdates = {
   },
 
   displayEstimatedTripCost(estimatedTripTotal) {
+    this.mainContainer.classList.add('blue-background');
     const estimatedCost = document.querySelector('#estimatedCost');
-    estimatedCost.innerHTML = `<p>Estimated Cost: $${estimatedTripTotal.toFixed(2)} (10% travel agent fee included)</p>`;
+    estimatedCost.innerHTML = `<p class="estimated-cost">Estimated Cost: $${estimatedTripTotal.toFixed(2)} (10% travel agent fee included)</p>`;
   },
 
   submitNewTripRequest(traveler, allTrips, allDestinations) {
@@ -150,6 +152,7 @@ let domUpdates = {
   },
 
   displayTripRequestSuccess() {
+    this.mainContainer.classList.add('blue-background');
     this.mainContainer.innerHTML = `
     <p>Your new trip request has been successfully submitted.</p> 
     <p>Its status is pending travel agent approval.</p>
@@ -157,7 +160,8 @@ let domUpdates = {
   },
 
   displayTrips(trips, type) {
-    this.mainContainer.innerHTML = `<h2>${type} Trips:</h2>`;
+    this.mainContainer.classList.add('blue-background');
+    this.mainContainer.innerHTML = `<h2>${type} Trips</h2>`;
     if (!trips.length) {
       this.mainContainer.innerHTML += `
         <p>Nothing to see here.</p> 
@@ -188,6 +192,7 @@ let domUpdates = {
   },
 
   displayTravelExpenses(totalTravelExpensesThisYear) {
+    this.mainContainer.classList.add('blue-background');
     this.mainContainer.innerHTML = `
       <h2>Total Travel Expenses for ${new Date().getFullYear()}:</h2>
       <p>$${totalTravelExpensesThisYear.toFixed(2)} (10% travel agent fee included)</p>

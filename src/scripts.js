@@ -57,7 +57,6 @@ const findDestinationForTrip = (trip, allDestinationData) => {
 }
 
 const isValidUserLogin = () => {
-  const loginButton = document.querySelector('#loginButton');
   const usernameInput = document.querySelector('#usernameInput').value;
   const passwordInput = document.querySelector('#passwordInput').value;
   const usernameSlice1 = usernameInput.slice(0,8);
@@ -67,23 +66,43 @@ const isValidUserLogin = () => {
   const isValidPassword = passwordInput === `travel`;
 
   if (isValidUserName && isValidPassword) {
-    loginButton.disabled = false;
+    return true;
   } else {
-    loginButton.disabled = true;
+    return false;
   }
 }
 
-const loginForm = document.querySelector('#loginForm');
-loginForm.addEventListener('input', () => {
-  isValidUserLogin();
-})
+const displayLoginError = () => {
+  const loginErrorMsg = document.querySelector('#loginErrorMsg');
+  const usernameInput = document.querySelector('#usernameInput').value;
+  const passwordInput = document.querySelector('#passwordInput').value;
+  const usernameSlice1 = usernameInput.slice(0,8);
+  const usernameSlice2 = Number(usernameInput.slice(8, usernameInput.length));
+  const isValidUserName = usernameSlice1 === `traveler` && 
+    usernameSlice2 >= 1 && usernameSlice2 <= 50;
+  const isValidPassword = passwordInput === `travel`;
+
+  if (!isValidUserName || !isValidPassword) {
+    loginErrorMsg.innerText = "Please enter a valid username and password";
+  }
+}
+
+const hideLoginError = () => {
+  const loginErrorMsg = document.querySelector('#loginErrorMsg');
+  loginErrorMsg.innerText = "";
+}
 
 const loginButton = document.querySelector('#loginButton');
 loginButton.addEventListener('click', (event) => {
   event.preventDefault();
   const usernameInput = document.querySelector('#usernameInput').value.split('');
   const userId = Number(usernameInput.slice(8, usernameInput.length).join(''));
-  fetchAll(userId);
+  if (isValidUserLogin()) {
+    hideLoginError();
+    fetchAll(userId);
+  } else {
+    displayLoginError();
+  }
 })
 
 const addNewTripButton = document.querySelector('#addNewTripButton');
