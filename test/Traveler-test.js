@@ -31,7 +31,7 @@ describe('Traveler', () => {
         const matchingDestination = allDestinationsForSingleTraveler.find(destination => trip.destinationID === destination.id)
         const instantiatedTrip = new Trip(trip, new Destination(matchingDestination));
         return instantiatedTrip;
-    });
+      });
   
     traveler = new Traveler(singleTravelerInformation, instantiatedTripsForTraveler);
   });
