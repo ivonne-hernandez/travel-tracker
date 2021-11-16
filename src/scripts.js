@@ -74,7 +74,6 @@ const isValidUserLogin = () => {
 
 const displayLoginError = () => {
   const loginErrorMsg = document.querySelector('#loginErrorMsg');
-  loginErrorMsg.classList.remove('hidden');
   const usernameInput = document.querySelector('#usernameInput').value;
   const passwordInput = document.querySelector('#passwordInput').value;
   const usernameSlice1 = usernameInput.slice(0,8);
@@ -83,18 +82,14 @@ const displayLoginError = () => {
     usernameSlice2 >= 1 && usernameSlice2 <= 50;
   const isValidPassword = passwordInput === `travel`;
 
-  if (!isValidUserName && !isValidPassword) {
-    loginErrorMsg.innerText = "Please enter a valid username and password"
-  } else if (!isValidUserName) {
-    loginErrorMsg.innerText = "Please enter a valid username"
-  } else if (!isValidPassword) {
-    loginErrorMsg.innerText = "Please enter a valid password"
+  if (!isValidUserName || !isValidPassword) {
+    loginErrorMsg.innerText = "Please enter a valid username and password";
   }
 }
 
 const hideLoginError = () => {
   const loginErrorMsg = document.querySelector('#loginErrorMsg');
-  loginErrorMsg.classList.add('hidden');
+  loginErrorMsg.innerText = "";
 }
 
 const loginButton = document.querySelector('#loginButton');
