@@ -40,6 +40,7 @@ const fetchAll = (userId) => {
       domUpdates.hideLoginPage();
       domUpdates.displayTravelerWelcomeMsg(traveler);
     })
+    .catch(error => domUpdates.showGetErrorMsg(error));
 }
 
 const getTripsForTraveler = (singleTravelerData, allTripsData, allDestinationData) => {
@@ -59,7 +60,7 @@ const findDestinationForTrip = (trip, allDestinationData) => {
 const isValidUserLogin = () => {
   const usernameInput = document.querySelector('#usernameInput').value;
   const passwordInput = document.querySelector('#passwordInput').value;
-  const usernameSlice1 = usernameInput.slice(0,8);
+  const usernameSlice1 = usernameInput.slice(0, 8);
   const usernameSlice2 = Number(usernameInput.slice(8, usernameInput.length));
   const isValidUserName = usernameSlice1 === `traveler` && 
     usernameSlice2 >= 1 && usernameSlice2 <= 50;
@@ -76,7 +77,7 @@ const displayLoginError = () => {
   const loginErrorMsg = document.querySelector('#loginErrorMsg');
   const usernameInput = document.querySelector('#usernameInput').value;
   const passwordInput = document.querySelector('#passwordInput').value;
-  const usernameSlice1 = usernameInput.slice(0,8);
+  const usernameSlice1 = usernameInput.slice(0, 8);
   const usernameSlice2 = Number(usernameInput.slice(8, usernameInput.length));
   const isValidUserName = usernameSlice1 === `traveler` && 
     usernameSlice2 >= 1 && usernameSlice2 <= 50;

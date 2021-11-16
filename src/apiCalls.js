@@ -5,7 +5,7 @@ export let fetchSingleTravelerData = (id) => {
 //where<id> will be a number of a traveler’s id from login
 export let fetchAllTrips = () => {
   return fetch("http://localhost:3001/api/v1/trips")
-  .then(response => response.json())
+    .then(response => response.json())
 }
 
 export let fetchAllDestinations = () => {
@@ -21,5 +21,5 @@ export let postNewTrip = (newTrip) => {
       'Content-Type': 'application/json'
     }
   })
-  .then(response => response.json())
+    .then(response => response.json())
 }

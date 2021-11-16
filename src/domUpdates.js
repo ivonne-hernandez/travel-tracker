@@ -17,6 +17,11 @@ let domUpdates = {
     this.navContainer.classList.remove('hidden');
   },
 
+  showGetErrorMsg(error) {
+    const loginErrorMsg = document.querySelector('#loginErrorMsg');
+    loginErrorMsg.innerText = `Please check your network connection. ${error}`;
+  },
+
   displayTravelerWelcomeMsg(traveler) {
     const welcomeTraveler = document.querySelector('#welcomeTravelerMsg');
     welcomeTraveler.innerText = `Welcome, ${traveler.name}`;
@@ -51,10 +56,11 @@ let domUpdates = {
           </select>
         </div>
         <div>
-          <label id="estimatedCost" for="estimated-cost" class="estimated-cost">Estimated Cost</label>
+          <label id="estimatedCost" for="estimated-cost" class="estimated-cost">Estimated Cost:</label>
         </div>
         <div>
           <button class="submit-trip-request-button button-style" id="submitTripRequestButton" disabled>Submit Trip Request</button>
+          <p class="post-error-msg" id="postErrorMsg"></p>
         </div>
       </form>
     `;
@@ -67,6 +73,9 @@ let domUpdates = {
     newTripInputForm.addEventListener('input', function() {
       if (domUpdates.areValidUserInputFields()) {
         domUpdates.getEstimatedTripCost(allDestinations);
+      } else {
+        const estimatedCost = document.querySelector('#estimatedCost');
+        estimatedCost.innerHTML = `Estimated Cost:`;
       }
     });
 
@@ -120,7 +129,7 @@ let domUpdates = {
   displayEstimatedTripCost(estimatedTripTotal) {
     this.mainContainer.classList.add('blue-background');
     const estimatedCost = document.querySelector('#estimatedCost');
-    estimatedCost.innerHTML = `<p class="estimated-cost">Estimated Cost: $${estimatedTripTotal.toFixed(2)} (10% travel agent fee included)</p>`;
+    estimatedCost.innerHTML = `Estimated Cost: $${estimatedTripTotal.toFixed(2)} (10% travel agent fee included)`;
   },
 
   submitNewTripRequest(traveler, allTrips, allDestinations) {
@@ -146,9 +155,14 @@ let domUpdates = {
         const matchingTripDestination = allDestinations.find(destination => destination.id === response.newTrip.destinationID);
         traveler.trips.push(new Trip(response.newTrip, new Destination(matchingTripDestination)));
         allTrips.push(response.newTrip);
-    
         this.displayTripRequestSuccess();
       })
+      .catch(error => this.showPostErrorMsg(error));
+  },
+
+  showPostErrorMsg(error) {
+    const postErrorMsg = document.querySelector('#postErrorMsg');
+    postErrorMsg.innerHTML = `Please check your network connection. ${error}`;
   },
 
   displayTripRequestSuccess() {
