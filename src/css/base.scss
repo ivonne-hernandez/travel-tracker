@@ -109,7 +109,7 @@ body {
       font-family: $primary-font;
       font-size: 18px;
       height: 28px;
-      width: 175x;
+      width: 175px;
     }
 
   }
@@ -134,14 +134,23 @@ body {
     .login-form {
       display: grid;
       justify-items: center;
-      line-height: 25px;
+      line-height: 20px;
       grid-gap: 10px;
 
       label {
         display: block;
         font-size: 18px;
-
       }
+
+      input {
+        border-radius: 7px;
+        border: 1px solid black;
+      }
+    }
+
+    .login-error-msg {
+      color: red;
+      font-weight: bold;
     }
 
     .login-button {
