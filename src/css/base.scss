@@ -1,16 +1,18 @@
 /* This is an example of how to import a partial scss file*/
 @import 'normalize';
 @import '_variables';
+@import '_mixins';
+
 * {
   box-sizing: border-box;
   margin: 0%;
+  font-family: 'Signika Negative';
 }
 
 html {
   background: url("../images/plane-background.jpg") no-repeat center center fixed;
   background-size: cover;
 }
-
 
 body {
   color: $black;
@@ -19,10 +21,8 @@ body {
   width: 100%;
 
   .h1-container {
+    @include grid(1fr 1fr 1fr, space-between);
     align-items: center;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-content: space-between;
     width: 100%;
     
     h1 {
@@ -44,46 +44,59 @@ body {
     }
   }
 
+  .button-style {
+    background-color: #b2dded;
+    border: 1px solid $black;
+    border-radius: 7px;
+
+    &:hover {
+      background-color: #36bff7;
+      box-shadow: 0px 15px 20px rgba(62, 104, 87, 0.4);
+      color: #fff;
+      cursor: pointer;
+    }
+
+    &:disabled {
+      pointer-events: none;
+    }
+  }
+
   nav {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    justify-content: space-between;
+    @include grid(repeat(6, 1fr), space-between);
     justify-items: center;
     margin: 40px 0px 40px;
 
     .nav-button {
-      background-color: #b2dded;
-      border: 1px solid $black;
-      border-radius: 7px;
-      font-family: $primary-font;
       font-size: 20px;
       height: 41px;
       width: 175px;
-       
-      &:hover {
-        cursor: pointer;
-      }
     }
   }
 
   .main-container {
-    margin: auto;
     height: 475px;
-    opacity: 0.90;
-    width: 650px;
     line-height: 30px;
+    margin: auto;
+    opacity: 0.90;
     overflow-y: scroll;
     padding: 15px;
+    width: 650px;
 
     h2 {
       font-size: 25px;
       margin-bottom: 15px;
     }
-    .new-trip-form {
 
+    .new-trip-form {
       label {
         display: block;
         font-size: 18px;
+      }
+
+      .estimated-cost {
+        font-size: 20px;
+        font-weight: $bold-font;
+        padding-top: 10px;
       }
     }
 
@@ -97,30 +110,18 @@ body {
       }
     }
 
-    .submit-trip-request-button:disabled {
-      cursor: not-allowed;
-    }
-
     .submit-trip-request-button {
-      margin-top: 10px;
-      background-color: #b2dded;
-      border: 1px solid $black;
-      border-radius: 7px;
-      font-family: $primary-font;
       font-size: 18px;
-      height: 28px;
+      height: 30px;
+      margin-top: 10px;
       width: 175px;
     }
-
   }
 
   .login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    @include flexbox(column, center, center);
     font-size: 20px;
+    width: 100%;
 
     h1 {
       font-size: 40px;
@@ -129,21 +130,20 @@ body {
     }
 
     .h1-user-icon {
+      height: 80px;
       justify-self: center;
       margin-bottom: 10px;
       width: 80px;
-      height: 80px;
     }
 
     .login-form {
       display: grid;
+      grid-gap: 12px;
       justify-items: center;
       line-height: 20px;
-      grid-gap: 12px;
 
       label {
-        display: flex;
-        justify-content: center;
+        @include flexbox(column, center, center);
       }
 
       input {
@@ -153,43 +153,30 @@ body {
 
       .login-error-msg {
         color: red;
-        font-weight: bold;
+        font-weight: $bold-font;
         height: 15px;
       }
 
       .login-button {
-        margin-top: 10px;
-        background-color: #53bae3;
-        border: 1px solid $black;
-        border-radius: 7px;
-        font-family: $primary-font;
+        font-weight: $bold-font;
         height: 30px;
-        width: 100px;
-        letter-spacing: 1px;
-        font-weight: bold;
-  
-        &:hover {
-          cursor: pointer;
-          background-color: #36bff7;
-          box-shadow: 0px 15px 20px rgba(62, 104, 87, 0.4);
-          color: #fff;
-        }
+        letter-spacing: 1.5px;
+        margin-top: 10px;
+        width: 140px;
       }
-    }
-
-    }
-    .hidden {
-      display: none;
     }
   }
 
+  .hidden {
+    display: none;
+  }
 
   p {
     font-size: 18px;
   }
 
-.blue-background {
-  background: #75c1e1;
-  border-radius: 7px;
+  .blue-background {
+    background: #75c1e1;
+    border-radius: 7px;
+  }
 }
-
