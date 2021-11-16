@@ -22,11 +22,10 @@ import Destination from './Destination';
 import domUpdates from './domUpdates';
 
 let traveler;
-let userId = 44;
-let allDestinations;
 let allTrips;
+let allDestinations;
 
-const fetchAll = () => {
+const fetchAll = (userId) => {
   const singleTravelerDataPromise = fetchSingleTravelerData(userId);
   const allTripsDataPromise = fetchAllTrips();
   const allDestinationsDataPromise = fetchAllDestinations();
@@ -38,6 +37,7 @@ const fetchAll = () => {
       allDestinations = data[2].destinations;
       const tripsForTraveler = getTripsForTraveler(singleTravelerData, allTrips, allDestinations);
       traveler = new Traveler(singleTravelerData, tripsForTraveler);
+      domUpdates.hideLoginPage();
       domUpdates.displayTravelerWelcomeMsg(traveler);
     })
 }
@@ -56,7 +56,35 @@ const findDestinationForTrip = (trip, allDestinationData) => {
   return allDestinationData.find((destination) => destination.id === trip.destinationID);
 }
 
-window.addEventListener('load', fetchAll);
+const isValidUserLogin = () => {
+  const loginButton = document.querySelector('#loginButton');
+  const usernameInput = document.querySelector('#usernameInput').value;
+  const passwordInput = document.querySelector('#passwordInput').value;
+  const usernameSlice1 = usernameInput.slice(0,8);
+  const usernameSlice2 = Number(usernameInput.slice(8, usernameInput.length));
+  const isValidUserName = usernameSlice1 === `traveler` && 
+    usernameSlice2 >= 1 && usernameSlice2 <= 50;
+  const isValidPassword = passwordInput === `travel`;
+
+  if (isValidUserName && isValidPassword) {
+    loginButton.disabled = false;
+  } else {
+    loginButton.disabled = true;
+  }
+}
+
+const loginForm = document.querySelector('#loginForm');
+loginForm.addEventListener('input', () => {
+  isValidUserLogin();
+})
+
+const loginButton = document.querySelector('#loginButton');
+loginButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  const usernameInput = document.querySelector('#usernameInput').value.split('');
+  const userId = Number(usernameInput.slice(8, usernameInput.length).join(''));
+  fetchAll(userId);
+})
 
 const addNewTripButton = document.querySelector('#addNewTripButton');
 addNewTripButton.addEventListener('click', () => {
